@@ -17,7 +17,16 @@ var models = require("../models");
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-models.sequelize.sync();
+models.sequelize.sync().then( () => {
+  models.User.findOrCreate({
+      where: {
+        username: 'sampleuser'
+      }
+    });
+})
+.catch( e => {
+  console.log("Failed to sync with error:", e);
+});
 
 /**
  * Create HTTP server.
