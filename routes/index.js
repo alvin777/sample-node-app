@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/health', function(req, res, next) {
+router.get('/api/health', function(req, res, next) {
   sequelize.authenticate().then( errors => {
     console.log(errors)
     res.json({
